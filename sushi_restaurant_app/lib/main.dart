@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       title: 'Cozy Coffee',
-      home: LandingScreen(),
+      home: const LandingScreen(),
       routes: {
         '/landing': (context)=> const LandingScreen(),
         '/menu': (context)=> const MenuScreen(),
