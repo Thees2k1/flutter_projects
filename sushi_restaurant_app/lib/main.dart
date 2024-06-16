@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sushi_restaurant_app/screens/landing.dart';
+import 'package:sushi_restaurant_app/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'Cozy Coffee',
       home: LandingScreen(),
+      routes: {
+        '/landing': (context)=> const LandingScreen(),
+        '/menu': (context)=> const MenuScreen(),
+      },
     );
   }
 }
