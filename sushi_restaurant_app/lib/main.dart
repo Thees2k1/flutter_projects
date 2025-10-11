@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:sushi_restaurant_app/screens/landing.dart';
+import 'package:sushi_restaurant_app/screens/menu.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return  MaterialApp(
+      title: 'Cozy Coffee',
+      home: const LandingScreen(),
+      routes: {
+        '/landing': (context)=> const LandingScreen(),
+        '/menu': (context)=> const MenuScreen(),
+      },
+    );
+  }
+}
