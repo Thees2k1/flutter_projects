@@ -10,11 +10,12 @@ class GitHubClientPage extends StatelessWidget {
   const GitHubClientPage({super.key});
   @override
   Widget build(BuildContext context) {
+    final configs = GitHubOAuthConfig.fromEnvironment();
     return GitHubLoginWidget(
       builder: (context, client) => GitHubClientView(httpClient: client),
-      githubClientId: githubClientId,
-      githubClientSecret: githubClientSecret,
-      githubScopes: githubScopes,
+      githubClientId: configs.githubClientId,
+      githubClientSecret: configs.githubClientSecret,
+      githubScopes: configs.githubScopes,
     );
   }
 }
