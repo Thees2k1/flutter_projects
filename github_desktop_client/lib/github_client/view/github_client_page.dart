@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:github/github.dart';
+import 'package:github_desktop_client/github_client/utils/get_viewer_detail.dart';
+import 'package:github_desktop_client/github_client/utils/github_oauth_credentials.dart';
+import 'package:github_desktop_client/github_client/view/github_summary.dart';
+import 'package:github_desktop_client/github_client/widgets/github_login.dart';
+import 'package:github_desktop_client/l10n/l10n.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:window_to_front/window_to_front.dart';
+
+class GitHubClientPage extends StatelessWidget {
+  const GitHubClientPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final configs = GitHubOAuthConfig.fromEnvironment();
+    WindowToFront.activate();
+    return GitHubLoginWidget(
+      builder: (context, client) => GitHubClientView(httpClient: client),
+      githubClientId: configs.githubClientId,
+      githubClientSecret: configs.githubClientSecret,
+      githubScopes: configs.githubScopes,
+    );
+  }
+}
+
+class GitHubClientView extends StatelessWidget {
+  const GitHubClientView({
+    required this.httpClient,
+    super.key,
+  });
+
+  final oauth2.Client httpClient;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.githubClientAppBarTitle)),
+      body: FutureBuilder<GitHub>(
+        future: getGitHub(httpClient.credentials.accessToken),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError || !snapshot.hasData) {
+            debugPrint(snapshot.error.toString());
+            return const Center(
+              child: Text('Something went wrong.'),
+            );
+          }
+          final gitHub = snapshot.data!;
+          return GitHubSummaryView(gitHub: gitHub);
+        },
+      ),
+    );
+  }
+}

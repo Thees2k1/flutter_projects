@@ -174,3 +174,16 @@ Alternatively, run `flutter run` and code generation will take place automatical
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
 [very_good_cli_link]: https://github.com/VeryGoodOpenSource/very_good_cli
+
+### About github_oauth_creedential.dart
+- follow this tutorial [Creating an OAuth App](https://docs.github.com/en/developers/apps/creating-an-oauth-app). after registered a new OAuth app. you can get your client ID and Client secret. store them as local variable in your app like so:
+
+```Dart
+//lib/github_client/utils/github_oauth_credentials.dart
+// TODO(CodelabUser): Create an OAuth App
+const githubClientId = 'YOUR_GITHUB_CLIENT_ID_HERE';
+const githubClientSecret = 'YOUR_GITHUB_CLIENT_SECRET_HERE';
+
+// OAuth scopes for repository and user information
+const githubScopes = ['repo', 'read:org'];
+```

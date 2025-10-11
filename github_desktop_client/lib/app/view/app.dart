@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_desktop_client/counter/counter.dart';
+import 'package:github_desktop_client/github_client/view/github_client_page.dart';
 import 'package:github_desktop_client/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const GitHubClientPage(),
     );
   }
 }
