@@ -20,6 +20,8 @@ dependencies:
   intl: ^0.20.2
   oauth2: ^2.0.3
   url_launcher: ^6.3.2
+  window_to_front:
+    path: ../window_to_front
 
 dev_dependencies:
   bloc_test: ^10.0.0

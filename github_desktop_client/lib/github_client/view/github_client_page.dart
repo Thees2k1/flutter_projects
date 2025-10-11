@@ -5,12 +5,14 @@ import 'package:github_desktop_client/github_client/utils/github_oauth_credentia
 import 'package:github_desktop_client/github_client/view/widgets/github_login.dart';
 import 'package:github_desktop_client/l10n/l10n.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:window_to_front/window_to_front.dart';
 
 class GitHubClientPage extends StatelessWidget {
   const GitHubClientPage({super.key});
   @override
   Widget build(BuildContext context) {
     final configs = GitHubOAuthConfig.fromEnvironment();
+    WindowToFront.activate();
     return GitHubLoginWidget(
       builder: (context, client) => GitHubClientView(httpClient: client),
       githubClientId: configs.githubClientId,
