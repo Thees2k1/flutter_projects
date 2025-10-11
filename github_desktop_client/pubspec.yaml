@@ -12,9 +12,17 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.0
   flutter_localizations:
     sdk: flutter
+  fluttericon: ^2.0.0
+  github: ^9.25.0
+  http: ^1.5.0
   intl: ^0.20.2
+  oauth2: ^2.0.3
+  url_launcher: ^6.3.2
+  window_to_front:
+    path: ../window_to_front
 
 dev_dependencies:
   bloc_test: ^10.0.0
@@ -26,3 +34,6 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  assets:
+    - .env.development
