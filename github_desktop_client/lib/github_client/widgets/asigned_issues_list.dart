@@ -42,7 +42,7 @@ class _AssignedIssuesListState extends State<AssignedIssuesList> {
                 'Issue #${assignedIssue.number} '
                 'opened by ${assignedIssue.user?.login ?? ''}',
               ),
-              onTap: () => launchUrl( assignedIssue.htmlUrl),
+              onTap: () => launchUrl(assignedIssue.htmlUrl),
             );
           },
           itemCount: assignedIssues!.length,
