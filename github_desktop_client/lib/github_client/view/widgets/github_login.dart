@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart' as oauth2;
@@ -11,7 +10,6 @@ final Uri _authorizationEndpoint = Uri.parse(
 final Uri _tokenEndpoint = Uri.parse(
   'https://github.com/login/oauth/access_token',
 );
-
 typedef AuthenticatedBuilder =
     Widget Function(
       BuildContext context,
@@ -60,11 +58,11 @@ class _GitHubLoginWidgetState extends State<GitHubLoginWidget> {
     );
   }
 
-  void _loginToGitHub() async {
+  Future<void> _loginToGitHub() async {
     await _redirectServer?.close();
     _redirectServer = await HttpServer.bind('localhost', 0);
-    final oauth2.Client authenticatedHttpClient = await _getOAuth2Client(
-      Uri.parse("http://localhost:${_redirectServer!.port}/auth"),
+    final authenticatedHttpClient = await _getOAuth2Client(
+      Uri.parse('http://localhost:${_redirectServer!.port}/auth'),
     );
     setState(() {
       _client = authenticatedHttpClient;
@@ -93,8 +91,8 @@ class _GitHubLoginWidgetState extends State<GitHubLoginWidget> {
     );
 
     await _redirect(authorizationUrl);
-    var responseQueryParams = await _listen();
-    var client = await grant.handleAuthorizationResponse(responseQueryParams);
+    final responseQueryParams = await _listen();
+    final client = await grant.handleAuthorizationResponse(responseQueryParams);
     return client;
   }
 
@@ -130,10 +128,8 @@ class _JsonAcceptingHttpClient extends http.BaseClient {
 }
 
 class GitHubLoginException implements Exception {
-  final String message;
-
   const GitHubLoginException(this.message);
-
+  final String message;
   @override
   String toString() {
     return message;

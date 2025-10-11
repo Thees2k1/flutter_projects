@@ -1,55 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:github_desktop_client/github_client/cubit/github_client_cubit.dart';
+import 'package:github/github.dart';
+import 'package:github_desktop_client/github_client/utils/get_viewer_detail.dart';
+import 'package:github_desktop_client/github_client/utils/github_oauth_credentials.dart';
+import 'package:github_desktop_client/github_client/view/widgets/github_login.dart';
 import 'package:github_desktop_client/l10n/l10n.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 class GitHubClientPage extends StatelessWidget {
   const GitHubClientPage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => GitHubClientCubit(),
-      child: const GitHubClientView(),
+    return GitHubLoginWidget(
+      builder: (context, client) => GitHubClientView(httpClient: client),
+      githubClientId: githubClientId,
+      githubClientSecret: githubClientSecret,
+      githubScopes: githubScopes,
     );
   }
 }
 
 class GitHubClientView extends StatelessWidget {
-  const GitHubClientView({super.key});
+  const GitHubClientView({
+    required this.httpClient,
+    super.key,
+  });
+
+  final oauth2.Client httpClient;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.githubClientAppBarTitle)),
-      body: const Center(child: GitHubClientText()),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () => context.read<GitHubClientCubit>().increment(),
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-            onPressed: () => context.read<GitHubClientCubit>().decrement(),
-            child: const Icon(Icons.remove),
-          ),
-        ],
+      body: FutureBuilder<CurrentUser>(
+        future: getViewerDetail(httpClient.credentials.accessToken),
+        builder: (context, snapshot) {
+          return Center(
+            child: snapshot.hasData
+                ? Text('Hello ${snapshot.data!.login}!')
+                : const Text('Retrieving viewer login details...'),
+          );
+        },
       ),
     );
-  }
-}
-
-class GitHubClientText extends StatelessWidget {
-  const GitHubClientText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final count = context.select((GitHubClientCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.displayLarge);
   }
 }
