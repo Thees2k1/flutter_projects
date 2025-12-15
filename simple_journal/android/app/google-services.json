@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "480060936646",
+    "project_id": "portfolio-nguyenthe",
+    "storage_bucket": "portfolio-nguyenthe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480060936646:android:cac9d86fe01c71f8a6e2c7",
+        "android_client_info": {
+          "package_name": "com.example.simple_journal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClYMr7Dfazl8ME7gSts4M7gTQBNfBrCKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
