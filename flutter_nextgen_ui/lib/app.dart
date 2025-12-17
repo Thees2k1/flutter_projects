@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nextgen_ui/styles.dart';
+// import 'package:flutter_nextgen_ui/styles.dart';
+
+import 'title_screen/title_screen.dart';
 
 class AppTheme {
   static final defaulAppTheme = ThemeData().copyWith();
@@ -14,14 +16,7 @@ class NextGenApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.dark,
       darkTheme: AppTheme.defaulAppDarkTheme,
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            'Insert Next-Generation UI Here...',
-            style: TextStyles.h2,
-          ),
-        ),
-      ),
+      home: const TitleScreen(),
     );
   }
 }
