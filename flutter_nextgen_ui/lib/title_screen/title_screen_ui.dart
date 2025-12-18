@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:focusable_control_builder/focusable_control_builder.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 import '../assets.dart';
-import '../common/ui_scaler.dart';
+import '../common/common.dart';
 import '../styles.dart';
 
 class TitleScreenUi extends StatelessWidget {
   const TitleScreenUi({
     super.key,
-    required this.difficulty, // Edit from here...
+    required this.difficulty,
     required this.onDifficultyPressed,
     required this.onDifficultyFocused,
+    required this.onStartPressed,
   });
 
   final int difficulty;
   final void Function(int difficulty) onDifficultyPressed;
-  final void Function(int? difficulty) onDifficultyFocused; // to here.
+  final void Function(int? difficulty) onDifficultyFocused;
+  final VoidCallback onStartPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,7 +54,7 @@ class TitleScreenUi extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 20, right: 40),
-                child: _StartBtn(onPressed: () {}),
+                child: _StartBtn(onPressed: onStartPressed),
               ),
             ),
           ),
@@ -144,7 +147,7 @@ class _DifficultyBtn extends StatelessWidget {
                   duration: .3.seconds,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF00D1FF).withOpacity(.1),
+                      color: const Color(0xFF00D1FF).withAlpha(26),
                       border: Border.all(color: Colors.white, width: 5),
                     ),
                   ),
@@ -153,7 +156,7 @@ class _DifficultyBtn extends StatelessWidget {
                 if (state.isHovered || state.isFocused) ...[
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF00D1FF).withOpacity(.1),
+                      color: const Color(0xFF00D1FF).withAlpha(26),
                     ),
                   ),
                 ],
@@ -182,7 +185,7 @@ class _TitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final content = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -204,6 +207,35 @@ class _TitleText extends StatelessWidget {
           style: TextStyles.h3,
         ).animate().fadeIn(delay: 1.seconds, duration: .7.seconds),
       ],
+    );
+
+    return Consumer<FragmentPrograms?>(
+      builder: (context, fragmentPrograms, child) {
+        if (fragmentPrograms == null) {
+          return content;
+        }
+        return TickingBuilder(
+          builder: (context, time) {
+            return AnimatedSampler((image, size, canvas) {
+              const double overdrawPx = 30;
+              final shader = fragmentPrograms.ui.fragmentShader();
+              shader
+                ..setFloat(0, size.width)
+                ..setFloat(1, size.height)
+                ..setFloat(2, time)
+                ..setImageSampler(0, image);
+
+              Rect rect = Rect.fromLTWH(
+                -overdrawPx,
+                -overdrawPx,
+                size.width + overdrawPx,
+                size.height + overdrawPx,
+              );
+              canvas.drawRect(rect, Paint()..shader = shader);
+            }, child: content);
+          },
+        );
+      },
     );
   }
 }
@@ -270,7 +302,6 @@ class _StartBtnState extends State<_StartBtn> {
             .animate()
             .fadeIn(delay: 2.3.seconds)
             .slide(begin: const Offset(0, .2));
-        ;
       },
     );
   }
