@@ -17,6 +17,7 @@ class AssetsPaths {
   static const String titleSelectedLeft = '$_images/select-left.png';
   static const String titleSelectedRight = '$_images/select-right.png';
   static const String pulseParticle = '$_images/particle3.png';
+  static const String particleWave = '$_images/particle-wave.png';
 
   static const String _shaders = 'assets/shaders';
   static const String orbShader = '$_shaders/orb_shader.frag';
