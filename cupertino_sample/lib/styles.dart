@@ -30,6 +30,7 @@ abstract class Styles {
     fontSize: 14,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
+    backgroundColor: Color.fromARGB(0, 0, 0, 0),
   );
 
   static const TextStyle deliveryTimeLabel = TextStyle(
