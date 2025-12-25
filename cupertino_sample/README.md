@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-Specific cupertino component used:
+Specific cupertino components used:
 - Cupertino:
     Functions:
     - runApp();
@@ -12,7 +12,9 @@ Specific cupertino component used:
     - CupertinoPageScaffold
     - CupertinoNavigationBar
     - CupertinoTabScaffold
+    - CupertinoButton
     - CupertinoSliverNavigationBar
+    - CupertinoDatetimePicker
 
     Packages:
     - cupertino_icons
