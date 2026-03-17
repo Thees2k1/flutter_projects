@@ -41,7 +41,7 @@ class QuizController extends ChangeNotifier {
   void nextQuiz() {
     if (currentQuizIndex + 1 >= _quises.length) {
       reachLastQuiz = true;
-      notifyListeners();
+      goToView(QuizView.report);
       return;
     }
 
