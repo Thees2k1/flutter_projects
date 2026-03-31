@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_journal/src/screens/logged_in_view.dart';
 import 'package:simple_journal/src/screens/logged_out_view.dart';
