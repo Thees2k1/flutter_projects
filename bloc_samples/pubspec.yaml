@@ -1,0 +1,33 @@
+name: bloc_samples
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  bloc: ^9.2.0
+  bloc_concurrency: ^0.3.0
+  equatable: ^2.0.8
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  http: ^1.6.0
+  meta: ^1.17.0
+  stream_transform: ^2.1.1
+
+  authentication_repository:
+   path: packages/authentication_repository
+  user_repository:
+   path: packages/user_repository
+  formz: ^0.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
