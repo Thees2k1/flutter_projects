@@ -1,7 +1,7 @@
 *.env
 *.env.*
 
-# Flutter generated plugin registrants
+`# Flutter generated plugin registrants
 **/generated_plugin_registrant.*
 **/GeneratedPluginRegistrant.*
 **/generated_plugins.cmake
@@ -9,7 +9,7 @@
 # Optional: platform build outputs
 **/linux/flutter/generated_plugin_registrant.*
 **/windows/flutter/generated_plugin_registrant.*
-**/macos/Flutter/GeneratedPluginRegistrant.*
+**/macos/Flutter/GeneratedPluginRegistrant.*`
 
 # Build folders (recommended)
 **/build/

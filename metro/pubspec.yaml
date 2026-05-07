@@ -1,16 +1,14 @@
-name: clean_todo_v2
+name: metro
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.0+1
 
 environment:
-  sdk: ^3.10.4
+  sdk: ^3.11.5
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_it: ^2.1.2
-  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:
