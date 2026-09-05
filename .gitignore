@@ -14,3 +14,5 @@
 # Build folders (recommended)
 **/build/
 *.code-workspace
+
+/lib/shared/config.dart
